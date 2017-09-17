@@ -1,0 +1,47 @@
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    sha: v0.9.3
+    hooks:
+    -   id: check-merge-conflict
+    -   id: debug-statements
+    -   id: check-json
+    -   id: check-yaml
+-   repo: git://github.com/pre-commit/mirrors-pylint
+    sha: v1.7.2
+    hooks:
+    -   id: pylint
+        args:
+        - --rcfile=.pylintrc
+        - --reports=no
+-   repo: https://github.com/Lucas-C/pre-commit-hooks
+    sha: v1.1.4
+    hooks:
+    -   id: remove-crlf
+    -   id: remove-tabs
+    -   id: insert-license
+        files: \.py$
+        args:
+        - --license-filepath
+        - LICENSE-short.txt
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    sha: v1.1.0
+    hooks:
+    -   id: python-safety-dependencies-check
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
+    sha: v1.0.3
+    hooks:
+    -   id: python-bandit-vulnerability-check
+        files: .py$
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-lxml
+    sha: v1.0.2
+    hooks:
+    -   id: forbid-html-img-without-alt-text
+    -   id: forbid-non-std-html-attributes
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-java
+    sha: v1.3.6
+    hooks:
+    -   id: validate-html
+        args: [--remove-mustaches, "--ignore=Expected \"<!DOCTYPE html>\""]
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+    sha: v1.0.1
+    hooks:
+    -   id: markdown-toc
