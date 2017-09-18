@@ -7,6 +7,8 @@ https://www.pycon.fr/2017/programme.html#hooks-de-pre-commit-pour-git
 
 La présentation a été réalisé avec [reveal.js](https://github.com/hakimel/reveal.js/).
 
+Le diagramme `slides/pre-commit-diagram.png` a été généré grâce à https://mermaidjs.github.io/mermaid-live-editor/ depuis le fichier `slides/pre-commit-diagram.mmd`.
+
 
 # Demo
 

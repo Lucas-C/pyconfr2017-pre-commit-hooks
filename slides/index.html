@@ -1,3 +1,10 @@
+<!--Reveal.js:
+- Press 's' to open speaker-notes pop-up window
+- Press ESC to enter the slide overview- Press 'b' to fade out to black screen
+- Change the background on a slide: <!-- .slide: data-background="#ff0000" -- >
+- PDF export using Chrome: https://github.com/hakimel/reveal.js/#pdf-export
+    + append 'index.html?print-pdf' and scroll to the end before printing
+-->
 <!doctype html>
 <html>
     <head>
@@ -44,19 +51,6 @@
 
 
 
-## pre-commit hooks == PAIN ?
-<figure>
-    <a href="images/2017/09/PZO8500Dargley_500.jpeg"><img src="CommitStrip-2015-09-18.jpg" alt="CommitStrip du 2015/09/18" style="width: 40%"></a>
-    <figcaption><small>CommitStrip du 2015/09/18</small></figcaption>
-</figure>
-<img class="fragment" src="tampon_oui_mais_pas_que.png" alt="Oui mais pas que !" style="position: fixed; top: 50%; left: 70%">
-
-Note:
-- demander au public qui les utilise
-- à VSCT, environnement multi-OS, ont acquis une mauvaise réputation
-
-
-
 ## Bonjour !
 
 <img src="avatar.jpg" alt="Une image d'avatar" style="border: none; width: 15%">
@@ -67,19 +61,61 @@ Note:
 
 
 
-## Plan
+## pre-commit ??
+
+Extrait de [git-scm.com](https://git-scm.com/book/fr/v1/Personnalisation-de-Git-Crochets-Git)
+
+> Le crochet pre-commit est lancé en premier [...]. Il est utilisé pour inspecter l'instantané qui est sur le point d'être validé, pour vérifier si vous avez oublié quelque chose, pour s'assurer que les tests passent ou pour examiner ce que vous souhaitez inspecter dans le code.
+
+
+
+
+## L'aïeul
+
+`lint`:
+
+- existait déjà [1979](http://web.cuzuco.com/~cuzuco/v7/v7vol1.pdf)
+- vérifiait du code C
+
+> Among the
+things which are currently found are unreachable statements, loops not entered at the top, variables
+declared and not used, and logical expressions whose value is constant
+
+
+
+## Casse-pied ?
+<figure>
+    <img src="CommitStrip-2015-09-18.jpg" alt="CommitStrip du 2015/09/18"
+         style="width: 140%">
+    <figcaption><small><a href="https://www.commitstrip.com/fr/2015/09/18/pre-commit-hook-some-are-more-equal-than-others/">CommitStrip du 2015/09/18</a></small></figcaption>
+</figure>
+<img class="fragment" src="tampon_oui_mais_pas_que.png" alt="Oui mais pas que !" style="position: fixed; top: 30%; left: 85%">
+
+Note:
+- à VSCT, environnement multi-OS, ont acquis une mauvaise réputation
+- 2 questions:
+  * qui en a déjà utilisé ?
+  * à qui ça a déjà cassé les pieds ?
+
+
+
+## Au programme
 - Pourquoi les utiliser ?
 - Leur fonctionnement
 - Démo
+- Astuces
 
 
 
 ## Pourquoi les utiliser ?
 
-- gain de temps
-- historique  `git` + propre
-- validation côté client **ET** serveur
-- "un outil pour les gouverner tous" etc.
+<ul>
+  <li class="fragment">assurance qualité</li>
+  <li class="fragment">gain de temps</li>
+  <li class="fragment">historique `git` plus propre</li>
+  <li class="fragment">validation côté client **ET** serveur</li>
+  <li class="fragment"><img src="ring-from-lord-of-the-rings.png" alt="ring from Lord of the Rings" style="width: 4rem"> "un outil pour les gouverner tous" etc.</li>
+</ul>
 
 
 
@@ -93,34 +129,38 @@ Note:
   </div>
 </div>
 
-- en Python <span style="font-size: 1.8rem">(alt: [overcommit](https://github.com/brigade/overcommit) en Ruby, [git-hooks](https://github.com/git-hooks/git-hooks) en Go)</span>
-- une [bibliothèque](http://pre-commit.com/hooks.html) de **126** _hooks_,
-dont: `autopep8`, `flake8`, `prettier`, `prospector`, `pylint`, `yapf`...
-- 5 lignes pour **créer** un nouveau _hook_
-- projet-open source très actif
+<ul>
+  <li class="fragment">en Python <span style="font-size: 1.8rem">(alt: [overcommit](https://github.com/brigade/overcommit) en Ruby, [git-hooks](https://github.com/git-hooks/git-hooks) en Go)</span></li>
+  <li class="fragment">une [bibliothèque](http://pre-commit.com/hooks.html) de **126** _hooks_,
+dont: `autopep8`, `flake8`, `prettier`, `prospector`, `pylint`, `yapf`...</li>
+  <li class="fragment">5 lignes pour **créer** un nouveau _hook_</li>
+  <li class="fragment">projet open-source très actif</li>
+</ul>
 
 Note:
-- nom pourri
-- historiquement développé par Yelp
+- nom pourri -> je vais l'appeler "pre-commit Python"
+- historiquement développé à Yelp
 
 
 
-## Fonctionnement (1/2)
+## Fonctionnement (1/3)
 
-<img src="I_fucked_up_Git_so_bad_it_turned_into_Guitar_Hero.png" alt="" style="position: fixed; top: 10%; left: -20%">
+![](pre-commit-diagram.png)
 
-**Installation:**
-- la configuration est lue depuis `.pre-commit-config.yaml`
-- clonage des repos `git` contenants les _hooks_ en Python / Go / NodeJS / Ruby / Swift / Docker
-- les éventuelles `additional_dependencies` sont installées (pour Python: dans un `venv`)
+
+
+## Fonctionnement (2/3)
+
+**Installation en cache:**
+1. la configuration est lue depuis `.pre-commit-config.yaml`
+2. les repos `git` contenant les _hooks_ en Python / Go / NodeJS / Ruby / Swift / Docker sont clonés
+3. les éventuelles `additional_dependencies` sont installées (pour Python: dans un `venv`)
 
 Note: sur le côté, non ce n'est pas une partition de Guitar Hero, mais bien un historique git
 
 
 
-## Fonctionnement (2/2)
-
-<img src="I_fucked_up_Git_so_bad_it_turned_into_Guitar_Hero.png" alt="" style="position: fixed; top: 10%; left: -20%">
+## Fonctionnement (3/3)
 
 **Exécution:**
 - les modifications non indexées de fichiers sont remisées (`git stash`)
@@ -131,10 +171,11 @@ Note: sur le côté, non ce n'est pas une partition de Guitar Hero, mais bien un
 
 
 ## Demo
+<img src="Piratey-from-wikimedia.png" alt="Capitaine Crochet" style="max-height: 100vh">
 
 
 ## Installation
-
+<!-- .slide: data-background="#268bd2" -->
 ```bash
 pip install pre-commit
 # -> donne accès à la commande `pre-commit`
@@ -144,7 +185,7 @@ pre-commit install
 
 
 ## CLI basics
-
+<!-- .slide: data-background="#268bd2" -->
 ```bash
 pre-commit run $hook_id
 # -> exécute un unique hook sur tous les fichiers "addés"
@@ -156,7 +197,8 @@ pre-commit run --all-files
 
 
 ## Local hooks
-```yaml
+<!-- .slide: data-background="#268bd2" -->
+```ruby
 -   repo: local
     hooks:
     -   id: check-bash-syntax
@@ -172,7 +214,7 @@ pre-commit run --all-files
 [Intégration continue](http://pre-commit.com/#usage-in-continuous-integration) **super** simple.
 
 Exemple d'un `.travis.yml` pour [Travis CI](travis-ci.org):
-```yaml
+```ruby
 language: python
 python: "3.6"
 install: pip install pre-commit
@@ -191,12 +233,12 @@ MAJ des hooks au dernier tag publié :
 
 
 
-## Windows support
+## Support Windows ?
 
-- Cygwin : **100%** supporté
-- MSYS2 : **100%** supporté
-- Git For Windows : **100%** supporté
-- Windows 10 bash  **100%** supporté
+- Cygwin : <span style="color:LimeGreen">**100%**</span> supporté
+- MSYS2 : <span style="color:LimeGreen">**100%**</span> supporté
+- Git For Windows : <span style="color:LimeGreen">**100%**</span> supporté
+- Windows 10 bash  <span style="color:LimeGreen">**100%**</span> supporté
 - TortoiseGit: pas supporté
   
 Note: pour Cygwin, j'ai testé les hooks Go & NodeJS

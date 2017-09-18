@@ -1,0 +1,11 @@
+graph TD
+pc(<strong>project repo:</strong><br><code>.pre-commit-config.yaml</code>)
+pc -->|git://|github.com(<strong>github.com</strong><br>- hook1<br>- hook2)
+pc -->|http://|bitbucket.org(<strong>bitbucket.org</strong><br>- hook3)
+pc -->local(<strong>local</strong><br>- hook4)
+
+style pc fill:#eee8d5,stroke:#6c71c4,stroke-width:2px;
+style github.com fill:#fdf6e3,stroke:#cb4b16,stroke-width:2px;
+style bitbucket.org fill:#fdf6e3,stroke:#cb4b16,stroke-width:2px;
+style local fill:#fdf6e3,stroke:#2aa198,stroke-width:2px;
+linkStyle default fill:none,stroke:#859900,stroke-width:2px;
