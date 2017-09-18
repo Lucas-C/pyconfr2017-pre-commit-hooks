@@ -1,1 +1,1 @@
-pytsite<1.2
+pytsite==1.1.3
