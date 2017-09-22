@@ -80,8 +80,8 @@
   <img src="avatar.jpg" alt="Une image d'avatar" style="border: none; width: 30%; height: 30%; margin-right: 2rem">
   <div style="display: flex; flex-direction: column; text-align: left">
     <p>**Lucas Cimon**</p>
-    <p><i class="fa fa-pencil"></i> https://chezsoi.org + <i class="fa fa-rss"></i> [<img src="shaarli-icon.png" style="margin: 0; width: 3rem">](https://chezsoi.org/shaarli)</p>
     <p><i class="fa fa-map-marker"></i> [Voyages-Sncf.com Technologies](https://open.voyages-sncf.com)<br>@ Nantes</p>
+    <p><i class="fa fa-pencil"></i> https://chezsoi.org + <i class="fa fa-rss"></i> [<img src="shaarli-icon.png" style="margin: 0; width: 3rem">](https://chezsoi.org/shaarli)</p>
   </div>
 </div>
 
@@ -104,7 +104,8 @@ Note: dire à l'oral : "je vais vous le lire"
 - existait déjà [1979](http://web.cuzuco.com/~cuzuco/v7/v7vol1.pdf)
 - vérifiait du code C
 
-<img src="checking-C-programs-with-lint-1988.jpg" style="max-height: 20rem">
+<img src="checking-C-programs-with-lint-1988.jpg" style="max-height: 20rem"
+      alt="Couverture O'Reilly - Checking C programs with lint - 1988">
 
 
 
@@ -136,6 +137,9 @@ Note:
   + _"un outil pour les gouverner tous..."_
 </div>
 
+Note:
+- QA: code style, tests, détection de bugs
+
 
 
 ## Pourquoi celui-ci ?
@@ -164,7 +168,7 @@ Note:
 
 ## Fonctionnement (1/2)
 
-![](pre-commit-diagram2.png)
+![Diagramme explicatif](pre-commit-diagram2.png)
 
 Note: étapes d'installation (en cache local)
 1. la configuration est lue
@@ -181,11 +185,15 @@ Note: étapes d'installation (en cache local)
   * le `type` du _hook_: `text`, `executable`, `python`...
   * si leur nom correspond à la _regex_ `files` du _hook_
 
+Note: ce qui se passe au `git commit`
+
 
 
 ## Demo
 <span id="hook-text">hook</span>
 <img id="captain-hook" src="Piratey-from-wikimedia.png" alt="Capitaine Crochet" style="max-height: 30rem">
+
+Note: commencer par montrer contenu du YAML
 
 
 

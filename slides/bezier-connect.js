@@ -6,13 +6,13 @@ function connect(args) {
     args.x1 += (args.leftXOffset || 0);
     args.y1 = leftPos.y;
     args.y1 += (args.left.offsetHeight / 2);
-   
+
     var rightPos = args.right.getBoundingClientRect();
     args.x2 = rightPos.left;
     args.x2 += (args.rightXOffset || 0);
     args.y2 = rightPos.y;
     args.y2 += (args.right.offsetHeight / 2);
-   
+
     var radius = args.circleRadius || 5;
     if (args.leftCircle) drawCircle({x:args.x1, y:args.y1, radius:radius, color:args.color});
     if (args.rightCircle) drawCircle({x:args.x2, y:args.y2, radius:radius, color:args.color});
@@ -37,9 +37,9 @@ function drawCurvedLine(args) {
     var hy1=args.y1;
     var hx2=args.x2 - delta;
     var hy2=args.y2;
-    var path = 'M '  + args.x1 + ' ' + args.y1 + 
-               ' C ' + hx1 + ' ' + hy1 
-                     + ' '  + hx2 + ' ' + hy2 
+    var path = 'M '  + args.x1 + ' ' + args.y1 +
+               ' C ' + hx1 + ' ' + hy1
+                     + ' '  + hx2 + ' ' + hy2
                + ' ' + args.x2 + ' ' + args.y2;
     shape.setAttributeNS(null, 'd', path);
     shape.setAttributeNS(null, 'fill', 'none');
@@ -56,8 +56,8 @@ function createSVG() {
         svg.setAttribute('style', 'position:absolute;top:0px;left:0px');
         svg.setAttribute('width', document.body.clientWidth);
         svg.setAttribute('height', document.body.clientHeight);
-        svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 
-                           'xmlns:xlink', 
+        svg.setAttributeNS('http://www.w3.org/2000/xmlns/',
+                           'xmlns:xlink',
                            'http://www.w3.org/1999/xlink');
         document.body.appendChild(svg);
     }

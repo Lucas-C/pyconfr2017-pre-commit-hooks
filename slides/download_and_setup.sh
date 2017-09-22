@@ -11,6 +11,3 @@ unzip $version.zip
 rm reveal.js-$version/{README.md,index.html,Gruntfile.js,LICENSE,bower.json,package.json}
 mv reveal.js-$version/* .
 rm -rf CONTRIBUTING.md  demo.html test/ reveal.js-$version/ $version.zip
-
-echo 'SUCCESS
-# OOOPS, missing comma ! ;)
