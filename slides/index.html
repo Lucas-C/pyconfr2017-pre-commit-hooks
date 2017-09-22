@@ -4,7 +4,7 @@
 - Press ESC to enter the slide overview- Press 'b' to fade out to black screen
 - Change the background on a slide: <!-- .slide: data-background="#ff0000" -- >
 - PDF export using Chrome: https://github.com/hakimel/reveal.js/#pdf-export
-    + append 'index.html?print-pdf' and scroll to the end before printing
+    + append 'index.html?print-pdf&showNotes' and scroll to the end before printing
 -->
 <html>
     <head>
@@ -20,12 +20,36 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <style>
+        .reveal {
+            background-image: url(../../logo_voyages-sncf.com.png);
+            background-size: 15%;
+            background-repeat: no-repeat;
+            background-position: 95% 0;
+            transition: background-size .5s ease-in-out;
+        }
+        .first-slide .reveal {
+            background-size: 20%;
+        }
+        #footer {
+            font-size: 1.35rem;
+            position: fixed;
+            bottom: 1rem;
+            left: 2rem;
+        }
         .reveal section img {
           border: none;
           box-shadow: none;
         }
-        p > code, li > code {
+        p > code, li > code, div > code, .fa-ban {
           color: #D05;
+        }
+        #hook-text {
+          position: fixed;
+          top: 30%;
+          left: 0;
+          color: #D05;
+          font-size: 4rem;
+          font-weight: bold;
         }
         </style>
 
@@ -40,24 +64,26 @@
     </head>
     <body>
         <div class="reveal">
+            <div id="footer">Lucas Cimon<br>@ PyConFr 2017</div>
             <div class="slides">
                 <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-notes="^Note:" data-charset="utf-8">
                     <textarea data-template>
+<!-- .element: data-state="first-slide" -->
 ## Hooks de pre-commit pour git
 
 ![Hypnotizing Kaa python from The Jungle Book](kaa-from-the-jungle-book.webp)
 
-<small>23/09/2017 @ PyConFr</small>
-
 
 
 ## Bonjour !
-
-<img src="avatar.jpg" alt="Une image d'avatar" style="border: none; width: 15%">
-
-- <i class="fa fa-map-marker"></i> Nantes
-- <i class="fa fa-pencil"></i> https://chezsoi.org + <i class="fa fa-rss"></i> [<img src="shaarli-icon.png" style="margin: 0; width: 3rem">](https://chezsoi.org/shaarli)
-- <i class="fa fa-code"></i> @ [Voyages-Sncf.com](https://open.voyages-sncf.com)
+<div style="display: flex; align-items: center">
+  <img src="avatar.jpg" alt="Une image d'avatar" style="border: none; width: 30%; height: 30%; margin-right: 2rem">
+  <div style="display: flex; flex-direction: column; text-align: left">
+    <p>**Lucas Cimon**</p>
+    <p><i class="fa fa-pencil"></i> https://chezsoi.org + <i class="fa fa-rss"></i> [<img src="shaarli-icon.png" style="margin: 0; width: 3rem">](https://chezsoi.org/shaarli)</p>
+    <p><i class="fa fa-map-marker"></i> [Voyages-Sncf.com Technologies](https://open.voyages-sncf.com)<br>@ Nantes</p>
+  </div>
+</div>
 
 
 
@@ -65,8 +91,9 @@
 
 Extrait de [git-scm.com](https://git-scm.com/book/fr/v1/Personnalisation-de-Git-Crochets-Git)
 
-> Le crochet pre-commit est lancé en premier [...]. Il est utilisé pour inspecter l'instantané qui est sur le point d'être validé, pour vérifier si vous avez oublié quelque chose, pour s'assurer que les tests passent ou pour examiner ce que vous souhaitez inspecter dans le code.
+> "Le crochet pre-commit est lancé en premier [...]. Il est utilisé pour inspecter l'instantané qui est sur le point d'être validé, pour vérifier si vous avez oublié quelque chose, pour s'assurer que les tests passent ou pour examiner ce que vous souhaitez inspecter dans le code."
 
+Note: dire à l'oral : "je vais vous le lire"
 
 
 
@@ -77,9 +104,7 @@ Extrait de [git-scm.com](https://git-scm.com/book/fr/v1/Personnalisation-de-Git-
 - existait déjà [1979](http://web.cuzuco.com/~cuzuco/v7/v7vol1.pdf)
 - vérifiait du code C
 
-> Among the
-things which are currently found are unreachable statements, loops not entered at the top, variables
-declared and not used, and logical expressions whose value is constant
+<img src="checking-C-programs-with-lint-1988.jpg" style="max-height: 20rem">
 
 
 
@@ -89,7 +114,6 @@ declared and not used, and logical expressions whose value is constant
          style="width: 140%">
     <figcaption><small><a href="https://www.commitstrip.com/fr/2015/09/18/pre-commit-hook-some-are-more-equal-than-others/">CommitStrip du 2015/09/18</a></small></figcaption>
 </figure>
-<img class="fragment" src="tampon_oui_mais_pas_que.png" alt="Oui mais pas que !" style="position: fixed; top: 30%; left: 85%">
 
 Note:
 - à VSCT, environnement multi-OS, ont acquis une mauvaise réputation
@@ -99,23 +123,18 @@ Note:
 
 
 
-## Au programme
-- Pourquoi les utiliser ?
-- Leur fonctionnement
-- Démo
-- Astuces
-
-
-
 ## Pourquoi les utiliser ?
 
-<ul>
-  <li class="fragment">assurance qualité</li>
-  <li class="fragment">gain de temps</li>
-  <li class="fragment">historique `git` plus propre</li>
-  <li class="fragment">validation côté client **ET** serveur</li>
-  <li class="fragment"><img src="ring-from-lord-of-the-rings.png" alt="ring from Lord of the Rings" style="width: 4rem"> "un outil pour les gouverner tous" etc.</li>
-</ul>
+- assurance qualité
+- gain de temps
+- historique `git` plus propre
+- validation côté client **ET** serveur
+
+<div class="fragment">
+  <img src="ring.gif" alt="ring from Lord of the Rings" style="max-height: 10rem">
+  <br>
+  + _"un outil pour les gouverner tous..."_
+</div>
 
 
 
@@ -143,24 +162,18 @@ Note:
 
 
 
-## Fonctionnement (1/3)
+## Fonctionnement (1/2)
 
-![](pre-commit-diagram.png)
+![](pre-commit-diagram2.png)
 
-
-
-## Fonctionnement (2/3)
-
-**Installation en cache:**
-1. la configuration est lue depuis `.pre-commit-config.yaml`
+Note: étapes d'installation (en cache local)
+1. la configuration est lue
 2. les repos `git` contenant les _hooks_ en Python / Go / NodeJS / Ruby / Swift / Docker sont clonés
 3. les éventuelles `additional_dependencies` sont installées (pour Python: dans un `venv`)
 
-Note: sur le côté, non ce n'est pas une partition de Guitar Hero, mais bien un historique git
 
 
-
-## Fonctionnement (3/3)
+## Fonctionnement (2/2)
 
 **Exécution:**
 - les modifications non indexées de fichiers sont remisées (`git stash`)
@@ -171,11 +184,12 @@ Note: sur le côté, non ce n'est pas une partition de Guitar Hero, mais bien un
 
 
 ## Demo
-<img src="Piratey-from-wikimedia.png" alt="Capitaine Crochet" style="max-height: 30rem">
+<span id="hook-text">hook</span>
+<img id="captain-hook" src="Piratey-from-wikimedia.png" alt="Capitaine Crochet" style="max-height: 30rem">
+
 
 
 ## Installation
-<!-- .slide: data-background="#268bd2" -->
 ```bash
 pip install pre-commit
 # -> donne accès à la commande `pre-commit`
@@ -185,7 +199,6 @@ pre-commit install
 
 
 ## CLI basics
-<!-- .slide: data-background="#268bd2" -->
 ```bash
 pre-commit run $hook_id
 # -> exécute un unique hook sur tous les fichiers "addés"
@@ -197,7 +210,6 @@ pre-commit run --all-files
 
 
 ## Local hooks
-<!-- .slide: data-background="#268bd2" -->
 ```ruby
 -   repo: local
     hooks:
@@ -213,7 +225,7 @@ pre-commit run --all-files
 ## Bonus
 [Intégration continue](http://pre-commit.com/#usage-in-continuous-integration) **super** simple.
 
-Exemple d'un `.travis.yml` pour [Travis CI](travis-ci.org):
+`.travis.yml`
 ```ruby
 language: python
 python: "3.6"
@@ -225,21 +237,17 @@ Note: pour hooks ne nécessitant pas Go/NodeJS/Java
 
 
 ## Bonus
-MAJ des hooks au dernier tag publié :
 
 `pre-commit autoupdate`
 
-→ modifie `.pre-commit-config.yaml`
+→ modifie `.pre-commit-config.yaml`<br>avec dernier tag
 
 
 
 ## Support Windows ?
 
-- Cygwin : <span style="color:LimeGreen">**100%**</span> supporté
-- MSYS2 : <span style="color:LimeGreen">**100%**</span> supporté
-- Git For Windows : <span style="color:LimeGreen">**100%**</span> supporté
-- Windows 10 bash  <span style="color:LimeGreen">**100%**</span> supporté
-- TortoiseGit: pas supporté
+- Cygwin, MSYS2, Git For Windows, Windows 10 bash<br><span style="color:LimeGreen">→ **100%**</span> supporté
+- TortoiseGit: ☹
   
 Note: pour Cygwin, j'ai testé les hooks Go & NodeJS
 
@@ -247,24 +255,30 @@ Note: pour Cygwin, j'ai testé les hooks Go & NodeJS
 
 ## Astuces
 
-- 2 solutions pour ne pas jouer les hooks 😦 :
+<i class="fa fa-ban"></i>😦<i class="fa fa-ban"></i>
 
 `git commit --no-verify`
 
-`export SKIP=$hook_id`
+`export SKIP=$hook_id1,$hook_id2`
 
-- pour inspecter les repos / venv des hooks:
+<div class="fragment">
+<hr>
+pour inspecter les repos / venv des hooks:
 
 `~/.cache/pre-commit/`
+</div>
 
-<small>(cf. aussi: [fonctions shell](https://github.com/Lucas-C/pre-commit-hooks/blob/master/README.md#handy-shell-functions))</small> 
+Note: cf. aussi [fonctions shell](https://github.com/Lucas-C/pre-commit-hooks/blob/master/README.md#handy-shell-functions)
 
 
 
-## That's all folks !
+## En résumé
 
-<img alt="Mr. Bean tire avec un pistolet sur une ampoule pour éteindre la lumière" src="MrBeanSwitchOff.gif" style="width: 80%">
-
+<ul>
+  <li><span style="color:#2aa198">**simple d'utilisation**</span></li>
+  <li><span style="color:#dc322f">**puissant**</span></li>
+  <li><span style="color:#6c71c4">**rapide à mettre en place**</span></li>
+</ul>
                     </textarea data-template>
                 </section>
             </div>
@@ -272,21 +286,44 @@ Note: pour Cygwin, j'ai testé les hooks Go & NodeJS
 
         <script src="lib/js/head.min.js"></script>
         <script src="js/reveal.js"></script>
+        <script src="bezier-connect.js"></script>
 
         <script>
             // More info about config & dependencies:
             // - https://github.com/hakimel/reveal.js#configuration
             // - https://github.com/hakimel/reveal.js#dependencies
-            Reveal.initialize({
-
+            var options = {
                 history: true,
-
                 dependencies: [
                     { src: 'plugin/markdown/marked.js' },
                     { src: 'plugin/markdown/markdown.js' },
                     { src: 'plugin/notes/notes.js', async: true },
                     { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
                 ]
+            };
+            if (/showNotes/.test(location.search)) {
+                options.showNotes = true; // for PDF export to include notes
+            }
+            Reveal.initialize(options);
+            document.onclick = function (event) {
+                Reveal.next();
+            };
+            Reveal.addEventListener('slidechanged', function(event) {
+                if (event.indexh === 9) {
+                    setTimeout(function() {
+                        console.log('Drawing connexion');
+                        connect({
+                            left:document.getElementById('hook-text'),
+                            right:document.getElementById('captain-hook'),
+                            rightXOffset: 20,
+                            color: '#D05',
+                            tension: 0.3,
+                            rightCircle: true,
+                        });
+                      }, 2000)
+                } else {
+                    removeSVG ();
+                }
             });
         </script>
     </body>
