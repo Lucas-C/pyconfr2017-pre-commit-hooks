@@ -3,6 +3,8 @@ https://www.pycon.fr/2017/programme.html#hooks-de-pre-commit-pour-git
 
 Consultation en ligne: https://chezsoi.org/lucas/slides/pyconfr2017-pre-commit-hooks/
 
+PDF: https://chezsoi.org/lucas/slides/PyConFr2017_Hooks-de-pre-commit-pour-git.pdf
+
 <!-- toc -->
 
 # Slides

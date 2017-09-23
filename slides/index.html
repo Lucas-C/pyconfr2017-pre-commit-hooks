@@ -93,8 +93,6 @@ Extrait de [git-scm.com](https://git-scm.com/book/fr/v1/Personnalisation-de-Git-
 
 > "Le crochet pre-commit est lancé en premier [...]. Il est utilisé pour inspecter l'instantané qui est sur le point d'être validé, pour vérifier si vous avez oublié quelque chose, pour s'assurer que les tests passent ou pour examiner ce que vous souhaitez inspecter dans le code."
 
-Note: dire à l'oral : "je vais vous le lire"
-
 
 
 ## L'aïeul
@@ -117,7 +115,7 @@ Note: dire à l'oral : "je vais vous le lire"
 </figure>
 
 Note:
-- à VSCT, environnement multi-OS, ont acquis une mauvaise réputation
+- à VSCT, avaient initialement une mauvaise réputation
 - 2 questions:
   * qui en a déjà utilisé ?
   * à qui ça a déjà cassé les pieds ?
@@ -138,7 +136,7 @@ Note:
 </div>
 
 Note:
-- QA: code style, tests, détection de bugs
+- QA: code style, tests, bugs finding
 
 
 
@@ -161,7 +159,7 @@ dont: `autopep8`, `flake8`, `prettier`, `prospector`, `pylint`, `yapf`...</li>
 </ul>
 
 Note:
-- nom pourri -> je vais l'appeler "pre-commit Python"
+- nom pas top -> je vais l'appeler "pre-commit Python"
 - historiquement développé à Yelp
 
 
@@ -170,7 +168,7 @@ Note:
 
 ![Diagramme explicatif](pre-commit-diagram2.png)
 
-Note: étapes d'installation (en cache local)
+Note: Etapes d'installation (en cache local):
 1. la configuration est lue
 2. les repos `git` contenant les _hooks_ en Python / Go / NodeJS / Ruby / Swift / Docker sont clonés
 3. les éventuelles `additional_dependencies` sont installées (pour Python: dans un `venv`)
@@ -185,15 +183,29 @@ Note: étapes d'installation (en cache local)
   * le `type` du _hook_: `text`, `executable`, `python`...
   * si leur nom correspond à la _regex_ `files` du _hook_
 
-Note: ce qui se passe au `git commit`
+Note: == ce qui se passe au `git commit`
 
 
 
 ## Démo
-<span id="hook-text">hook</span>
+<span id="hook-text" class="nestedarrow">hook</span>
+<!-- We use reveal.js .nestedarrow CSS class that is hidden in PDF export -->
 <img id="captain-hook" src="Piratey-from-wikimedia.png" alt="Capitaine Crochet" style="max-height: 30rem">
+<svg id="svg-canvas" style="position:absolute;top:0px;left:0px" width="1280" height="590" xmlns:xlink="http://www.w3.org/1999/xlink" class="nestedarrow">
+  <!--
+  M = moveto X Y
+  C = Bezier Curve XctrlPt1 YctrlPt1 XctrlPt2 YctrlPt2 Xdest Ydest
+  -->
+  <path d="M 150 260 C 320 260 150 460 320 460" fill="none" stroke="#D05" stroke-width="3"></path>
+  <!-- src/dest -- >
+  <circle cx="150" cy="260" r="5" fill="#D05"></circle><!---->
+  <circle cx="320" cy="460" r="5" fill="#D05"></circle>
+  <!-- ctrl points -- >
+  <circle cx="320" cy="260" r="5" fill="green"></circle>
+  <circle cx="150" cy="460" r="5" fill="green"></circle><!---->
+</svg>
 
-Note: commencer par montrer contenu du YAML
+Note: montrer contenu du YAML
 
 
 ## Installation
@@ -240,7 +252,7 @@ install: pip install pre-commit
 script: pre-commit run --all-files
 ```
 
-Note: pour hooks ne nécessitant pas Go/NodeJS/Java
+Note: ! hooks nécessitant Go/NodeJS/Java
 
 
 ## Bonus
@@ -293,7 +305,7 @@ Note: cf. aussi [fonctions shell](https://github.com/Lucas-C/pre-commit-hooks/bl
 
         <script src="lib/js/head.min.js"></script>
         <script src="js/reveal.js"></script>
-        <script src="bezier-connect.js"></script>
+        <!--script src="bezier-connect.js"></script-->
 
         <script>
             // More info about config & dependencies:
@@ -315,23 +327,6 @@ Note: cf. aussi [fonctions shell](https://github.com/Lucas-C/pre-commit-hooks/bl
             document.onclick = function (event) {
                 Reveal.next();
             };
-            Reveal.addEventListener('slidechanged', function(event) {
-                if (event.indexh === 9) {
-                    setTimeout(function() {
-                        console.log('Drawing connexion');
-                        connect({
-                            left:document.getElementById('hook-text'),
-                            right:document.getElementById('captain-hook'),
-                            rightXOffset: 20,
-                            color: '#D05',
-                            tension: 0.3,
-                            rightCircle: true,
-                        });
-                      }, 2000)
-                } else {
-                    removeSVG ();
-                }
-            });
         </script>
     </body>
 </html>
