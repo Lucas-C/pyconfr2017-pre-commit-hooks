@@ -1,6 +1,8 @@
 Slides & exemples pour la conférence "Hooks de pre-commit pour git" de la PyConFr 2017:
 https://www.pycon.fr/2017/programme.html#hooks-de-pre-commit-pour-git
 
+Consultation en ligne: https://chezsoi.org/lucas/slides/pyconfr2017-pre-commit-hooks/
+
 <!-- toc -->
 
 # Slides
