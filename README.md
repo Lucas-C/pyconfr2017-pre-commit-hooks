@@ -16,4 +16,8 @@ Le diagramme `slides/pre-commit-diagram.png` a été généré grâce à https:/
 
 # Demo
 
-La démo a consisté a exécuter tous les hooks contenu dans `.pre-commit-config.yaml` sur ce repo.
+La démo a consisté à exécuter tous les hooks contenu dans `.pre-commit-config.yaml` sur ce repo:
+```
+pip install pre-commit
+pre-commit run --all-files
+```
