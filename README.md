@@ -7,6 +7,12 @@ PDF: https://chezsoi.org/lucas/slides/PyConFr2017_Hooks-de-pre-commit-pour-git.p
 
 <!-- toc -->
 
+- [Slides](#slides)
+- [Demo](#demo)
+- [License](#license)
+
+<!-- tocstop -->
+
 # Slides
 
 La présentation a été réalisé avec [reveal.js](https://github.com/hakimel/reveal.js/).
@@ -21,3 +27,7 @@ La démo a consisté à exécuter tous les hooks contenu dans `.pre-commit-confi
 pip install pre-commit
 pre-commit run --all-files
 ```
+
+# License
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Le contenu de ce dépôt est sous license <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike International</a>
